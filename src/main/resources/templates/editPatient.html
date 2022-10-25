@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="template1">
+<head>
+<meta charset="UTF-8">
+<title>formulaire patient</title>
+<link rel="stylesheet"
+	href="/webjars/bootstrap/5.2.2/css/bootstrap.min.css">
+</head>
+<body>
+
+	<div layout:fragment="content1">
+		<div class="col-md-6 offset-3">
+		<div class="card">
+			<div class="card-header">Modification patient</div>
+			<div class="card-body">
+				<form  method="post" th:object="${patient}" th:action="@{enregistrerPatient(id= ${patient.id},motCle=${currentMotCle},page=${currentPage})}">
+				<div class="row">
+				
+				<div class="col-md-4">
+					<label>ID : </label>
+					<label th:text="${patient.id}"></label>
+					
+						<input type="hidden" class="form-control"
+							name="id" th:value="${patient.id}"
+							th:field="*{id}">
+					</div>
+					
+					<div class="col-md-4">
+					<label>Nom</label>
+						<input type="text" class="form-control" placeholder="Enter nom"
+							name="nomPatient" th:value="${patient.nom}"
+							th:field="*{nom}">
+							<span class="text-danger" th:errors="${patient.nom}"></span>
+					</div>
+					<div class="col-md-4">
+					<label>Date de naissance</label>
+						<input type="date" class="form-control" placeholder="Enter date naissance"
+							name="datePatient" th:value="${patient.dateNaissance}"
+							th:field="*{dateNaissance}">
+							<span class="text-danger" th:errors="${patient.dateNaissance}"></span>
+					</div>
+					</div>
+					
+					<div class="row">
+					<div class="col-md-6 ">
+					
+						<label class="text-center">Malade</label>
+						<input type="checkbox" 
+							name="maladePatient" th:checked="${patient.malade}"
+							th:field="*{malade}">
+							<span class="text-danger" th:errors="${patient.malade}"></span>
+					</div>
+					<div class="col-md-6">
+					<label>Score</label>
+						<input type="text" class="form-control" placeholder="Enter score"
+							name="scorePatient" th:value="${patient.score}"
+							th:field="*{score}">
+							<span class="text-danger" th:errors="${patient.score}"></span>
+					</div>
+					
+				</div>
+				<button type="submit" class="btn btn-primary">Enregistre
+				</button>
+			</form>
+			</div>
+			</div>
+			
+		</div>
+	</div>
+
+</body>
+</html>
